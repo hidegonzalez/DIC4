@@ -26,6 +26,7 @@ DIC/
 ├── ICEIB2027-IEEE.zip               # 原始空白起始範本壓縮檔
 ├── ICEIB2027-IEEE-MobileNetV3.zip   # 已填入 MobileNetV3 內容的 Overleaf 上傳用壓縮檔
 ├── overleaf_upload_recording.mp4    # 瀏覽器代理於 Overleaf 建檔與編譯之完整錄影
+├── openspec/                        # OpenSpec 規範驅動文件（project.md, specs/, changes/）
 ├── conversation_export.md           # 完整流程總覽、意外排錯、Agent SOP 與完整對話紀錄
 └── README.md                        # 本專案說明文件
 ```
