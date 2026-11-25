@@ -1,0 +1,40 @@
+\section{Proposed Scheme}\label{sec:method}
+\subsection{Problem Formulation}
+Following~\cite{howard2019mobilenetv3}, hardware-aware architecture search seeks network parameters and topology $\theta$ that maximize classification accuracy while respecting a target on-device latency budget $T_{\mathrm{target}}$:
+\begin{equation}
+\theta^{*} = \arg\min_{\theta} \; \mathcal{L}_{\mathrm{CE}}(\theta) \quad \text{s.t.} \quad \mathrm{Latency}(\theta) \le T_{\mathrm{target}},
+\label{eq:objective}
+\end{equation}
+where $\mathcal{L}_{\mathrm{CE}}(\theta)$ denotes the cross-entropy training loss and $\mathrm{Latency}(\theta)$ is measured on the target mobile CPU.
+
+\subsection{System Architecture}
+As illustrated in Fig.~\ref{fig:architecture}, MobileNetV3 pairs inverted residual bottleneck blocks with Squeeze-and-Excitation (SE) channel attention and replaces expensive sigmoid-based swish activations with the piecewise-linear \textit{h-swish} approximation:
+\begin{equation}
+\mathrm{h\text{-}swish}[x] = x \, \frac{\mathrm{ReLU6}(x + 3)}{6}.
+\label{eq:hswish}
+\end{equation}
+\begin{figure}[t]
+\centering
+\IfFileExists{figures/architecture.pdf}{\includegraphics[width=\columnwidth]{architecture.pdf}}{\fbox{\parbox[c][25mm][c]{0.85\columnwidth}{\centering Insert MobileNetV3 architecture diagram here (architecture.pdf)}}}
+\caption{Overview of the MobileNetV3 building block and search pipeline.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Two-Stage Search and Refinement Algorithm}
+Algorithm~\ref{alg:method} outlines the two-stage hardware-aware design procedure combining global NAS with local NetAdapt refinement~\cite{howard2019mobilenetv3}.
+\begin{algorithm}[t]
+\caption{Hardware-Aware Search and NetAdapt Refinement}
+\label{alg:method}
+\begin{algorithmic}[1]
+\Require Search space $\mathcal{S}$, target latency $T_{\mathrm{target}}$, training dataset $\mathcal{D}$
+\Ensure Optimized architecture $\theta^{*}$
+\State Run platform-aware NAS on $\mathcal{S}$ to obtain seed network $\theta_{0}$
+\State Insert SE blocks and \textit{h-swish} activations in deeper layers
+\While{$\mathrm{Latency}(\theta) > T_{\mathrm{target}}$}
+\State Generate candidate proposals by shrinking individual layer channels
+\State Fine-tune each proposal briefly on $\mathcal{D}$ and measure CPU latency
+\State Select the proposal with minimal accuracy drop per latency reduction
+\EndWhile
+\State \Return Final fine-tuned architecture $\theta^{*}$
+\end{algorithmic}
+\end{algorithm}

@@ -1,0 +1,16 @@
+\section{Experimental Results and Discussion}\label{sec:experiments}
+\subsection{Experimental Setup}
+All reported benchmark figures are drawn from the ImageNet-1K image classification evaluation protocol in~\cite{howard2019mobilenetv3,sandler2018mobilenetv2}.
+Models are compared at standard $224 \times 224$ input resolution using a width multiplier of $1.0$ (unless noted otherwise), reporting parameter count, computational cost in Multiply-Adds (MAdds), and Top-1 validation accuracy.
+
+\subsection{Baseline Methods and Evaluation Metrics}
+MobileNetV2 (1.0) and MobileNetV2 (1.4)~\cite{sandler2018mobilenetv2} serve as the manual lightweight baselines against MobileNetV3-Large (1.0) and MobileNetV3-Small (1.0)~\cite{howard2019mobilenetv3}.
+Evaluation focuses on Top-1 accuracy (\%) alongside MAdds (in millions) and total parameters (in millions) to capture the accuracy--efficiency trade-off.
+
+\subsection{Performance Comparison}
+Table~\ref{tab:comparison} summarizes the published ImageNet Top-1 accuracy and resource footprint across the compared models.
+\input{tables/comparison}
+
+\subsection{Ablation Study and Discussion}
+Compared with MobileNetV2 (1.0), MobileNetV3-Large (1.0) improves ImageNet Top-1 accuracy by 3.2 percentage points (75.2\% vs.\ 72.0\%) while reducing MAdds from 300M to 219M and lowering mobile CPU latency by roughly 20\%~\cite{howard2019mobilenetv3}.
+For ultra-low-resource regimes, MobileNetV3-Small (1.0) reaches 67.4\% Top-1 accuracy with only 66M MAdds and 2.9M parameters, yielding a 6.6\% accuracy advantage over MobileNetV2 models at comparable latency~\cite{howard2019mobilenetv3}.

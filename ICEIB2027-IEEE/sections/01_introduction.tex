@@ -1,0 +1,20 @@
+\section{Introduction}\label{sec:intro}
+\subsection{Background and Motivation}
+Efficient neural network design is critical for on-device computer vision applications such as real-time object recognition, mobile photography, and embedded analytics.
+Modern edge processors impose tight constraints on floating-point operations, memory bandwidth, and thermal budgets, making conventional server-scale convolutional networks impractical for direct deployment.
+
+\subsection{Problem Statement and Research Gap}
+Hand-crafted lightweight architectures such as MobileNetV2~\cite{sandler2018mobilenetv2} introduced inverted residuals and linear bottlenecks to reduce computation.
+However, manual architecture tuning struggles to jointly optimize layer-wise channel widths, kernel sizes, and non-linearities for specific mobile hardware latency profiles.
+Automated network architecture search (NAS) can discover high-accuracy topologies, yet coarse block-level search alone often leaves redundant channels in individual layers.
+
+\subsection{Research Contributions}
+Drawing from Howard et al.~\cite{howard2019mobilenetv3}, the key contributions of the MobileNetV3 paradigm are as follows:
+\begin{itemize}
+\item Integrating platform-aware NAS for global block structure discovery with the NetAdapt algorithm for fine-grained per-layer channel tuning under target latency constraints.
+\item Incorporating lightweight Squeeze-and-Excitation (SE) attention modules and the hardware-friendly \textit{h-swish} non-linearity into inverted residual bottlenecks.
+\item Providing two calibrated model families (MobileNetV3-Large and MobileNetV3-Small) that advance the accuracy--latency Pareto frontier on ImageNet classification.
+\end{itemize}
+
+\subsection{Paper Organization}
+Section~\ref{sec:related} reviews related lightweight CNN designs. Section~\ref{sec:method} presents the MobileNetV3 formulation and search pipeline. Section~\ref{sec:experiments} summarizes the ImageNet benchmark comparison, and Section~\ref{sec:conclusion} concludes the paper.

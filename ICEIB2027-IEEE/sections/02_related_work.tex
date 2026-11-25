@@ -1,0 +1,8 @@
+\section{Related Work}\label{sec:related}
+\subsection{Existing Approaches}
+Early mobile vision models relied on depthwise separable convolutions to factorize standard spatial filtering from channel-wise projection.
+MobileNetV2~\cite{sandler2018mobilenetv2} improved representational efficiency via inverted residual blocks with linear bottlenecks, achieving 72.0\% ImageNet Top-1 accuracy at 300M MAdds and 3.4M parameters (or 74.7\% Top-1 accuracy at 585M MAdds with width multiplier 1.4).
+
+\subsection{Research Gap}
+While MobileNetV2 established a strong manual baseline, it applies uniform design heuristics across all network stages and relies on ReLU6 activations throughout.
+It does not exploit channel-wise attention or hardware-measured latency feedback during layer-level channel pruning, leaving room for simultaneous accuracy gains and latency reductions~\cite{howard2019mobilenetv3}.

@@ -1,0 +1,9 @@
+\begin{abstract}
+Deploying deep neural networks on mobile and edge devices requires balancing predictive accuracy against strict latency, memory, and power budgets.
+This paper summarizes the MobileNetV3 framework~\cite{howard2019mobilenetv3}, which combines hardware-aware network architecture search (NAS) with the NetAdapt algorithm and manual architectural refinements, including Squeeze-and-Excitation (SE) blocks and the hard-swish (\textit{h-swish}) activation function.
+Evaluated on the ImageNet classification benchmark, MobileNetV3-Large achieves 75.2\% Top-1 accuracy with approximately 219M multiply-adds (MAdds) and 5.4M parameters, improving accuracy by 3.2 percentage points over MobileNetV2 (72.0\% Top-1 accuracy at 300M MAdds) while reducing mobile CPU latency by roughly 20\%.
+A compact variant, MobileNetV3-Small, attains 67.4\% Top-1 accuracy at 66M MAdds and 2.9M parameters, demonstrating a 6.6\% accuracy gain over comparable-latency MobileNetV2 models.
+\end{abstract}
+\begin{IEEEkeywords}
+MobileNetV3, network architecture search, edge AI, image classification, lightweight convolutional neural networks
+\end{IEEEkeywords}
